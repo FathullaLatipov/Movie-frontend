@@ -1,0 +1,30 @@
+@import "tailwindcss/preflight";
+@tailwind utilities;
+@import "./fonts.css";
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'qanelas';
+}
+
+body{
+    background: #1B2133;
+}
+
+.container{
+    max-width: 1460px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+a{
+    text-decoration: none;
+}
+
+li{
+    list-style: none;
+}

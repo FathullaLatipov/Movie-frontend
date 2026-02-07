@@ -1,0 +1,22 @@
+<script setup>
+const props = defineProps({
+  size: Number,
+});
+</script>
+
+<template>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    :width="size"
+    :height="size"
+    viewBox="0 0 14 14"
+  >
+    <path
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M13.5 2H.5m13 5H.5m13 5H.5"
+    />
+  </svg>
+</template>
