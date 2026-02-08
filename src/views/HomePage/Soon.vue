@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted, computed } from "vue";
 import { useGenreStore } from "@/stores/categoryStore";
 import { storeToRefs } from "pinia";
+import { posterUrl } from "@/api/client";
 import Poster from "@/assets/images/poster.png";
 
 const screenWidth = ref(window.innerWidth);
@@ -21,6 +22,14 @@ genreStore.fetchMoviesByGenre();
 const handleGenreChange = (genre) => {
   genreStore.setActiveGenre(genre);
 };
+
+function getPosterSrc(url) {
+  try {
+    return posterUrl(url) || Poster;
+  } catch {
+    return Poster;
+  }
+}
 </script>
 
 <template>
@@ -50,11 +59,11 @@ const handleGenreChange = (genre) => {
         :key="item.id"
       >
         <div
-          v-if="item.poster !== 'Нет постера'"
+          v-if="item.poster"
           class="absolute z-2 top-0 left-0 w-full h-[460px] bg-[#00b7ff61] bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[10px]"
         ></div>
         <img
-          v-if="item.poster === 'Нет постера'"
+          v-if="!item.poster"
           class="w-full overflow-hidden h-[460px] object-cover rounded-[10px] transition-transform duration-300"
           :src="Poster"
           alt="Poster"
@@ -62,8 +71,10 @@ const handleGenreChange = (genre) => {
         <img
           v-else
           class="w-full h-[460px] overflow-hidden object-cover rounded-[10px] transition-transform duration-300"
-          :src="item.poster"
+          :src="getPosterSrc(item.poster)"
           alt=""
+          loading="lazy"
+          @error="($event.target).src = Poster"
         />
 
         <button
