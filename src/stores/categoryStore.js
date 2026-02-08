@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import axios from "axios";
+import { apiUrl } from "@/api/client";
 
 // Для API Кинопоиска жанры в единственном числе
 const genreToApi = {
@@ -34,7 +35,7 @@ export const useGenreStore = defineStore("genreStore", {
       this.loading = true;
       this.error = null;
       try {
-        const response = await axios.get("/api/search_by_genre", {
+        const response = await axios.get(apiUrl("/api/search_by_genre"), {
           params: { genre_name: genreName },
         });
         this.movies = response.data?.results ?? [];

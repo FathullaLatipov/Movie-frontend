@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import axios from "axios";
+import { apiUrl } from "@/api/client";
 
 export const useFilmStore = defineStore("filmStore", {
   state: () => ({
@@ -13,7 +14,7 @@ export const useFilmStore = defineStore("filmStore", {
       this.loading = true;
       this.error = null;
       try {
-        const response = await axios.get("/api/search_by_genre", {
+        const response = await axios.get(apiUrl("/api/search_by_genre"), {
           params: { genre_name: genreName },
         });
         this.movies = (response.data?.results ?? []).slice(0, 4);
