@@ -14,11 +14,11 @@ const genreStore = useGenreStore ();
           v-for="item in genreStore.movies.slice(0, 4)"
         >
           <div
-            v-if="item.poster !== 'Нет постера'"
+            v-if="item.poster"
             class="absolute z-2 top-0 left-0 w-full h-[460px] bg-[#00b7ff61] bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[10px]"
           ></div>
           <img
-            v-if="item.poster === 'Нет постера'"
+            v-if="!item.poster"
             class="w-full overflow-hidden h-[460px] object-cover rounded-[10px] transition-transform duration-300"
             :src="Poster"
             alt="Poster"
