@@ -18,7 +18,6 @@ export default defineConfig({
       "/api": {
         target: "https://fast.telier.uz",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
   },
