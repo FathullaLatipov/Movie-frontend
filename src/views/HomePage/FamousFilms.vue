@@ -1,8 +1,9 @@
 <script setup>
 import { useGenreStore } from "@/stores/categoryStore";
+import { posterUrl } from "@/api/client";
 import Poster from "@/assets/images/poster.png";
 
-const genreStore = useGenreStore ();
+const genreStore = useGenreStore();
 </script>
 <template>
   <section class="mt-[55px]">
@@ -26,9 +27,10 @@ const genreStore = useGenreStore ();
           <img
             v-else
             class="w-full h-[460px] overflow-hidden object-cover rounded-[10px] transition-transform duration-300"
-            :src="item.poster"
+            :src="posterUrl(item.poster)"
             alt="Image"
             loading="lazy"
+            @error="($event.target).src = Poster"
           />
 
           <!-- Hover qilinganda ko'k overlay -->

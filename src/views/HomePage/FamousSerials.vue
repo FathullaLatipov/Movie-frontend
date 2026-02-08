@@ -1,8 +1,9 @@
 <script setup>
 import { useGenreStore } from "@/stores/categoryStore";
+import { posterUrl } from "@/api/client";
 import Poster from "@/assets/images/poster.png";
 
-const genreStore = useGenreStore ();
+const genreStore = useGenreStore();
 </script>
 <template>
   <section class="mt-[55px]">
@@ -26,9 +27,10 @@ const genreStore = useGenreStore ();
           <img
             v-else
             class="w-full h-[460px] overflow-hidden object-cover rounded-[10px] transition-transform duration-300"
-            :src="item.poster"
+            :src="posterUrl(item.poster)"
             alt="Image"
             loading="lazy"
+            @error="($event.target).src = Poster"
           />
           <button
             class="absolute z-3 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-[18px] font-bold bg-[#fff] max-w-[225px] w-full h-[70px] flex font-[700] text-[#3657cb] justify-center items-center cursor-pointer rounded-[10px] px-4 py-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300"
