@@ -4,6 +4,14 @@ import { posterUrl } from "@/api/client";
 import Poster from "@/assets/images/poster.png";
 
 const genreStore = useGenreStore();
+
+function getPosterSrc(url) {
+  try {
+    return posterUrl(url) || Poster;
+  } catch {
+    return Poster;
+  }
+}
 </script>
 <template>
   <section class="mt-[55px]">
@@ -11,8 +19,9 @@ const genreStore = useGenreStore();
       <h2 class="font-[900] text-[65px] text-[#fff] mb-[60px]">Популярные фильмы</h2>
       <div class="flex flex-wrap justify-between gap-y-[35px] container">
         <div
-          class="max-w-[340px] w-full rounded-[10px] relative overflow-hidden group cursor-pointer"
           v-for="item in genreStore.movies.slice(0, 4)"
+          :key="item.id"
+          class="max-w-[340px] w-full rounded-[10px] relative overflow-hidden group cursor-pointer"
         >
           <div
             v-if="item.poster"
@@ -27,8 +36,8 @@ const genreStore = useGenreStore();
           <img
             v-else
             class="w-full h-[460px] overflow-hidden object-cover rounded-[10px] transition-transform duration-300"
-            :src="posterUrl(item.poster)"
-            alt="Image"
+            :src="getPosterSrc(item.poster)"
+            alt=""
             loading="lazy"
             @error="($event.target).src = Poster"
           />
