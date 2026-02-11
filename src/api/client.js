@@ -10,7 +10,7 @@ export function apiUrl(path) {
 }
 
 /** Постер через прокси бэкенда, чтобы не блокировался расширениями (ERR_BLOCKED_BY_CLIENT). */
-const POSTER_PROXY_HOSTS = ["avatars.mds.yandex.net", "st.kp.yandex.net"];
+const POSTER_PROXY_HOSTS = ["avatars.mds.yandex.net", "st.kp.yandex.net", "image.tmdb.org"];
 export function posterUrl(url) {
   if (!url || typeof url !== "string") return url;
   try {
