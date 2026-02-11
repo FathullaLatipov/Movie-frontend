@@ -1,7 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from "vue";
-import { useGenreStore } from "@/stores/categoryStore";
-import { storeToRefs } from "pinia";
+import { useHomeStore } from "@/stores/homeStore";
 import { posterUrl } from "@/api/client";
 import Poster from "@/assets/images/poster.png";
 
@@ -15,13 +14,7 @@ const isMobile = computed(() => screenWidth.value <= 768);
 const isTablet = computed(() => screenWidth.value > 768 && screenWidth.value <= 1024);
 const isDesktop = computed(() => screenWidth.value > 1024);
 
-const genreStore = useGenreStore();
-const { genres, activeGenre, movies } = storeToRefs(genreStore);
-genreStore.fetchMoviesByGenre();
-
-const handleGenreChange = (genre) => {
-  genreStore.setActiveGenre(genre);
-};
+const homeStore = useHomeStore();
 
 function getPosterSrc(url) {
   try {
@@ -55,7 +48,7 @@ function getPosterSrc(url) {
     <div class="flex flex-wrap justify-center gap-y-[35px] gap-x-[20px] container">
       <div
         class="max-w-[340px] w-full rounded-[10px] relative overflow-hidden group cursor-pointer"
-        v-for="item in genreStore.movies.slice(12, 16)"
+        v-for="item in homeStore.comingSoon"
         :key="item.id"
       >
         <div
