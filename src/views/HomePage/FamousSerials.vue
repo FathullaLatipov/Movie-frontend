@@ -1,9 +1,11 @@
 <script setup>
+import { storeToRefs } from "pinia";
 import { useHomeStore } from "@/stores/homeStore";
 import { posterUrl } from "@/api/client";
 import Poster from "@/assets/images/poster.png";
 
 const homeStore = useHomeStore();
+const { popularSeries } = storeToRefs(homeStore);
 
 function getPosterSrc(url) {
   try {
@@ -19,7 +21,7 @@ function getPosterSrc(url) {
       <h2 class="font-[900] text-[65px] text-[#fff] mb-[60px]">Популярные сериалы</h2>
       <div class="flex flex-wrap justify-between gap-y-[35px] container">
         <div
-          v-for="item in homeStore.popularSeries"
+          v-for="item in popularSeries"
           :key="item.id"
           class="max-w-[340px] w-full rounded-[10px] relative overflow-hidden group cursor-pointer"
         >

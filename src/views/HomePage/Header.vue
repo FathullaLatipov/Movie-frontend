@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from "vue";
+import { storeToRefs } from "pinia";
 import { useHomeStore } from "@/stores/homeStore";
 import { posterUrl } from "@/api/client";
 import Poster from "@/assets/images/poster.png";
@@ -15,6 +16,7 @@ const isTablet = computed(() => screenWidth.value > 768 && screenWidth.value <= 
 const isDesktop = computed(() => screenWidth.value > 1024);
 
 const homeStore = useHomeStore();
+const { popularNow } = storeToRefs(homeStore);
 
 function getPosterSrc(url) {
   try {
@@ -48,7 +50,7 @@ function getPosterSrc(url) {
     <div class="flex flex-wrap justify-center gap-y-[35px] gap-x-[20px] container">
       <div
         class="max-w-[340px] w-full rounded-[10px] relative overflow-hidden group cursor-pointer"
-        v-for="item in homeStore.popularNow"
+        v-for="item in popularNow"
         :key="item.id"
       >
         <div
