@@ -18,15 +18,20 @@ export const useHomeStore = defineStore("homeStore", {
       this.error = null;
       try {
         const [nowRes, moviesRes, seriesRes, soonRes] = await Promise.all([
-          axios.get(apiUrl("/api/popular_now")).catch((e) => ({ data: {} })),
-          axios.get(apiUrl("/api/popular_movies")).catch((e) => ({ data: {} })),
-          axios.get(apiUrl("/api/popular_series")).catch((e) => ({ data: {} })),
-          axios.get(apiUrl("/api/coming_soon")).catch((e) => ({ data: {} })),
+          axios.get(apiUrl("/api/popular_now")).catch((e) => ({ data: e.response?.data || {} })),
+          axios.get(apiUrl("/api/popular_movies")).catch((e) => ({ data: e.response?.data || {} })),
+          axios.get(apiUrl("/api/popular_series")).catch((e) => ({ data: e.response?.data || {} })),
+          axios.get(apiUrl("/api/coming_soon")).catch((e) => ({ data: e.response?.data || {} })),
         ]);
-        this.popularNow = Array.isArray(nowRes.data?.results) ? nowRes.data.results : [];
-        this.popularMovies = Array.isArray(moviesRes.data?.results) ? moviesRes.data.results : [];
-        this.popularSeries = Array.isArray(seriesRes.data?.results) ? seriesRes.data.results : [];
-        this.comingSoon = Array.isArray(soonRes.data?.results) ? soonRes.data.results : [];
+        const takeResults = (res) => (Array.isArray(res?.data?.results) ? res.data.results : []);
+        this.popularNow = takeResults(nowRes);
+        this.popularMovies = takeResults(moviesRes);
+        this.popularSeries = takeResults(seriesRes);
+        this.comingSoon = takeResults(soonRes);
+        const detail = nowRes.data?.detail || moviesRes.data?.detail || seriesRes.data?.detail || soonRes.data?.detail;
+        if (detail && !this.popularNow.length && !this.popularMovies.length && !this.popularSeries.length && !this.comingSoon.length) {
+          this.error = detail;
+        }
       } catch (err) {
         console.error("Ошибка загрузки блоков главной:", err);
         this.error = err.message || "Ошибка загрузки";
