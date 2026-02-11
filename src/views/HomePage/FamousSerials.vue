@@ -48,17 +48,8 @@ function getPosterSrc(url) {
           >
             Карточка фильма
           </button>
-          <h2
-            v-if="item.name === null"
-            class="text-[18px] text-[#fff] font-[700] mt-[10px]"
-          >
-            {{ item.alternativeName }}
-          </h2>
-          <h2
-            v-if="item.name !== null"
-            class="text-[18px] text-[#fff] font-[700] mt-[10px]"
-          >
-            {{ item.name }}
+          <h2 class="text-[18px] text-[#fff] font-[700] mt-[10px]">
+            {{ item.name || item.alternativeName || "Без названия" }}
           </h2>
         </div>
       </div>

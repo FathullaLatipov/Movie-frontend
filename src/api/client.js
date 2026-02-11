@@ -9,8 +9,8 @@ export function apiUrl(path) {
   return `${API_BASE}${p}`;
 }
 
-/** Постер через прокси бэкенда, чтобы не блокировался расширениями (ERR_BLOCKED_BY_CLIENT). */
-const POSTER_PROXY_HOSTS = ["avatars.mds.yandex.net", "st.kp.yandex.net", "image.tmdb.org"];
+/** Постер через прокси только для Yandex (часто блокируются). TMDB грузим напрямую — меньше 502. */
+const POSTER_PROXY_HOSTS = ["avatars.mds.yandex.net", "st.kp.yandex.net"];
 export function posterUrl(url) {
   if (!url || typeof url !== "string") return url;
   try {

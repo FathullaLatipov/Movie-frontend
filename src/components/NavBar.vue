@@ -8,7 +8,7 @@ import twitterIcon from "@/components/icons/twitterIcon.vue";
 import searchIcon from "@/components/icons/searchIcon.vue";
 import menuBarIcon from "@/components/icons/menuBarIcon.vue";
 import CloseIcon from "@/components/icons/CloseIcon.vue";
-import FilterIcon from "./icons/FilterIcon.vue";
+import FilterIcon from "@/components/icons/FilterIcon.vue";
 import { Motion } from "@motionone/vue";
 
 const isMenuOpen = ref(false);

@@ -2,7 +2,8 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import { apiUrl } from "@/api/client";
 
-// Для API Кинопоиска жанры в единственном числе
+// Стор для поиска по жанру (страница каталога/жанров). Главная использует homeStore.
+// Жанры в единственном числе для TMDB search_by_genre.
 const genreToApi = {
   приключения: "приключения",
   боевики: "боевик",

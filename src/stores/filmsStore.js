@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import { apiUrl } from "@/api/client";
 
+// Стор для блока «фильмы по жанру» (если понадобится отдельно). Главная использует homeStore.
 export const useFilmStore = defineStore("filmStore", {
   state: () => ({
     movies: [],
